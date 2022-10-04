@@ -1,41 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchGames } from './fetchGames'
 
-export default class App extends React.Component {
-
-  apiOptions = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
-      'X-RapidAPI-Host': process.env.REACT_APP_API_URL
-    }
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      games: []
-    }
-  }
-
-  componentDidMount() {
-    this.fetchGames([]).then(result => {
-      console.log(result)
-        this.setState({
-        games: result
-      })
+export default function App() {
+  const [state, setState] = useState({games: []})
+  useEffect(() => {
+    setState({ 
+      games: fetchGames()
     })
-  }
+  }, [])
 
-  fetchGames(filters) {
-    return fetch(`https://${process.env.REACT_APP_API_URL}/api/games`, this.apiOptions)
-      .then(response => {
-        return response.json()
-      })
-      .catch(err => console.error(err))
-
-  }
-
-  render() {
-    return <div data-testid="json">{JSON.stringify(this.state.games)}</div>
-  }
+  return <div data-testid="games">{JSON.stringify(state.games)}</div>
 }
