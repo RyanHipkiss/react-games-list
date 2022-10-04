@@ -10,8 +10,6 @@ export default class App extends React.Component {
     }
   };
 
-  lastFilters = null
-
   constructor(props) {
     super(props);
     this.state = {

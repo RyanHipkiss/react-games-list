@@ -10,12 +10,8 @@ const server = setupServer(
   })
 )
 
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
-
 test('renders text', async () => {
-
+  server.listen()
   await act(async() => {
     render(<App/>)
   })
@@ -23,4 +19,7 @@ test('renders text', async () => {
   await waitFor(() => {
     expect(JSON.parse(screen.getByTestId('json').textContent)).toStrictEqual({test: 'hello'})
   })
+
+  server.resetHandlers()
+  server.close()
 });
