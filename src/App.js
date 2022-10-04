@@ -18,9 +18,12 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchGames([]).then(result => this.setState({
-      games: result
-    }))
+    this.fetchGames([]).then(result => {
+      console.log(result)
+        this.setState({
+        games: result
+      })
+    })
   }
 
   fetchGames(filters) {
@@ -29,6 +32,7 @@ export default class App extends React.Component {
         return response.json()
       })
       .catch(err => console.error(err))
+
   }
 
   render() {
