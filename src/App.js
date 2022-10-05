@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGames } from './fetchGames'
+import React, { useEffect } from 'react';
+import { useGames } from './useGames';
 
 export default function App() {
-  const [state, setState] = useState({games: []})
+  const { Games } = useGames()
+
   useEffect(() => {
-    setState({ 
-      games: fetchGames()
-    })
   }, [])
 
-  return <div data-testid="games">{JSON.stringify(state.games)}</div>
+  return <div data-testid="games">{JSON.stringify(Games)}</div>
 }

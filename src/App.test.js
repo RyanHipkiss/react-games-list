@@ -1,18 +1,19 @@
-import AppTwo from "./AppTwo";
 import { render, screen, waitFor } from '@testing-library/react'
 import { act } from "react-dom/test-utils";
 import React from "react";
 import mockGame from "./game.mock";
+import App from './App';
 
-jest.mock('./fetchGames', () => ({
-    fetchGames: () => [mockGame]
+jest.mock('./useGames', () => ({
+    useGames: () => {
+        return { Games: [mockGame], Error: null}
+    }
 }))
 
 test('it should render the text', async () => {
-
     await act(() => {
-        render(<AppTwo/>)
+        render(<App/>)
     })
 
-    expect(JSON.parse(screen.getByTestId('text').textContent)).toStrictEqual([mockGame])
+    expect(JSON.parse(screen.getByTestId('games').textContent)).toStrictEqual([mockGame])
 })
