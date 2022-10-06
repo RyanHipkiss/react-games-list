@@ -10,10 +10,14 @@ jest.mock('./useGames', () => ({
     }
 }))
 
-test('it should render the text', async () => {
-    await act(() => {
-        render(<App/>)
-    })
+jest.mock('./Game', () => ({
+    Game: () => {
+        return <div>{mockGame.title}</div>
+    }
+}))
 
-    expect(JSON.parse(screen.getByTestId('games').textContent)).toStrictEqual([mockGame])
+test('it should render the text', () => {
+    render(<App/>)
+    
+    expect(screen.getByTestId('games').innerHTML).toStrictEqual(`<div>${mockGame.title}</div>`)
 })

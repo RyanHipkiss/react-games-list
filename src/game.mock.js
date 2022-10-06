@@ -1,5 +1,5 @@
 const mockGame = {
-    name: 'World of Warcraft'
+    title: 'World of Warcraft'
 }
 
 export default mockGame

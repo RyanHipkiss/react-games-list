@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
+import { Game } from './Game';
 import { useGames } from './useGames';
 
 export default function App() {
   const { Games } = useGames()
 
-  useEffect(() => {
-  }, [])
-
-  return <div data-testid="games">{JSON.stringify(Games)}</div>
+  return (
+    <div data-testid="games">
+      {Games && Games.map((game, index) => {
+        return <Game key={index} values={game} />
+      })}
+    </div>
+  )
 }
