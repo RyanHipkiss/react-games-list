@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import Game from "./Game"
+import { Game } from "./Game"
 import mockGame from './game.mock'
 
 test('it should render the game component', () => {
