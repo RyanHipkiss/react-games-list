@@ -7,12 +7,12 @@ export const useGames = (searchTerm: string) => {
 
     if (data) {
         data = data.filter((game: any) => {
-            return game.title.toLowerCase().includes(searchTerm)
+            return game.title.toLowerCase().includes(searchTerm.toLowerCase())
         })
     }
 
     return {
         games: data, 
-        error
+        error: error
     }
 }

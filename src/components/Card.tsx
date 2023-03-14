@@ -3,5 +3,5 @@ interface CardProps {
 }
 
 export const Card = (props: CardProps) => {
-    return <div>{props.title}</div>
+    return <div data-testid='CardTitle'>{props.title}</div>
 }

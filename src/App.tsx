@@ -8,6 +8,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { games, error } = useGames(searchTerm)
 
+  console.log(error)
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value)
   }
@@ -15,13 +16,17 @@ function App() {
   return (
     <>
       <Form onChange={handleSearch} />
-      { games && games.map((game: Game, index: number) => {
-        return <Card key={index} title={game.title} />
-      })}
+      { error && <h1 data-testid="AppError">Whoops we encountered an error!</h1>}
 
-      { (!games || !games.length || error) && <h1>No Games found</h1>}
+      { !error && (
+        <>
+          { (!games || !games.length) && <h1 data-testid="AppNoGamesText">No Games found</h1>}
 
-      { error && <h1>Whoops we encountered an error!</h1>}
+          { games && games.map((game: Game, index: number) => {
+            return <Card key={index} title={game.title} />
+          })}
+        </>
+      )}
     </>
   );
 }
